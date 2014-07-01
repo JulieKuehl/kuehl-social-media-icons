@@ -1,18 +1,18 @@
 <?php
 /*
-	Plugin Name: Name Widget
-	Description: A widget for adding your name in a sidebar.
+	Plugin Name: Kuehl Social Media Icons Widget
+	Description: A widget for adding your social media icons in a sidebar.
 	Plugin URI: https://gist.github.com/JLeuze/475bdd6bd6095b7bdf7c
-	Author: Josh Leuze
-	Author URI: http://www.jleuze.com/
+	Author: Julie Kuehl
+	Author URI: http://www.juliekuehl.com/
 	License: GPL2
 	Version: 1.0
 */
 
 /**
- * Adds Name widget.
+ * Adds Kuehl Social Media Icons widget.
  */
-class JL_Name_Widget extends WP_Widget {
+class Kuehl_Social_Media_Icons_Widget extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress.
@@ -20,8 +20,8 @@ class JL_Name_Widget extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'name', // Base ID
-			__('Name Widget', 'jl_name_widget'), // Name
-			array( 'description' => __( 'A widget for adding your name.', 'jl_name_widget' ), ) // Args
+			__('Kuehl Social Media Icons Widget', 'kuehl_social_media_icons_widget'), // Name
+			array( 'description' => __( 'A widget for adding social media icons.', 'kuehl_social_media_icons_widget' ), ) // Args
 		);
 	}
 
@@ -34,12 +34,12 @@ class JL_Name_Widget extends WP_Widget {
 	 * @param array $instance Saved values from database.
 	 */
 	public function widget( $args, $instance ) {
-		$jl_name = apply_filters( 'widget_title', $instance['jl_name'] );
+		$kuehl_social_media_icons = apply_filters( 'widget_title', $instance['kuehl_social_media_icons'] );
 
 		echo $args['before_widget'];
 		echo $args['before_title'] . '<span>Hello</span> my name is...' . $args['after_title'];
-		if ( ! empty( $jl_name ) ) {
-			echo '<p>' . $jl_name . '</p>';
+		if ( ! empty( $kuehl_social_media_icons ) ) {
+			echo '<p>' . $kuehl_social_media_icons . '</p>';
 		}
 		echo $args['after_widget'];
 	}
@@ -52,16 +52,16 @@ class JL_Name_Widget extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		if ( isset( $instance[ 'jl_name' ] ) ) {
-			$jl_name = $instance[ 'jl_name' ];
+		if ( isset( $instance[ 'kuehl_social_media_icons' ] ) ) {
+			$kuehl_social_media_icons = $instance[ 'kuehl_social_media_icons' ];
 		}
 		else {
-			$jl_name = __( 'Inigo Montoya', 'jl_name_widget' );
+			$kuehl_social_media_icons = __( 'Twitter', 'kuehl_social_media_icons_widget' );
 		}
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'jl_name' ); ?>"><?php _e( 'Name:' ); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'jl_name' ); ?>" name="<?php echo $this->get_field_name( 'jl_name' ); ?>" type="text" value="<?php echo esc_attr( $jl_name ); ?>">
+			<label for="<?php echo $this->get_field_id( 'kuehl_social_media_icons' ); ?>"><?php _e( 'Social Network:' ); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'kuehl_social_media_icons' ); ?>" name="<?php echo $this->get_field_name( 'kuehl_social_media_icons' ); ?>" type="text" value="<?php echo esc_attr( $kuehl_social_media_icons); ?>">
 		</p>
 	<?php
 	}
@@ -78,23 +78,23 @@ class JL_Name_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
-		$instance['jl_name'] = ( ! empty( $new_instance['jl_name'] ) ) ? strip_tags( $new_instance['jl_name'] ) : '';
+		$instance['kuehl_social_media_icons'] = ( ! empty( $new_instance['kuehl_social_media_icons'] ) ) ? strip_tags( $new_instance['kuehl_social_media_icons'] ) : '';
 
 		return $instance;
 	}
 
-} // class JL_Name_Widget
+} // class Kuehl_Social_Media_Icons_Widget
 
-// register Name widget
-function jl_register_name_widget() {
-	register_widget( 'JL_Name_Widget' );
+// register Kuehl Social Media Icons widget
+function kuehl_register_social_media_icons_widget() {
+	register_widget( 'Kuehl_Social_Media_Icons_Widget' );
 }
-add_action( 'widgets_init', 'jl_register_name_widget' );
+add_action( 'widgets_init', 'kuehl_register_social_media_icons_widget' );
 
 /**
  * Adds CSS to style widget
  */
-function jl_name_widget_css() {
+function kuehl_social_media_icons_widget_css() {
 	?><style>
 		.widget_name {
 			background-color: #327ed4;
@@ -132,4 +132,4 @@ function jl_name_widget_css() {
 		}
 	</style><?php
 }
-add_action( 'wp_head', 'jl_name_widget_css' );
+add_action( 'wp_head', 'kuehl_social_media_icons_widget_css' );
